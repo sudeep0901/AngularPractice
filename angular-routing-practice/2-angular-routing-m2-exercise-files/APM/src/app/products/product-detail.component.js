@@ -8,13 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var router_1 = require('@angular/router');
 var core_1 = require('@angular/core');
 var product_service_1 = require('./product.service');
 var ProductDetailComponent = (function () {
-    function ProductDetailComponent(productService) {
+    function ProductDetailComponent(productService, route) {
         this.productService = productService;
+        this.route = route;
         this.pageTitle = 'Product Detail';
+        console.log(this.route.snapshot.params['id']);
     }
+    ProductDetailComponent.prototype.ngOnInit = function () {
+        //+ used to cast to number
+        var id = +this.route.snapshot.params['id'];
+        this.getProduct(id);
+    };
     ProductDetailComponent.prototype.getProduct = function (id) {
         var _this = this;
         this.productService.getProduct(id).subscribe(function (product) { return _this.product = product; }, function (error) { return _this.errorMessage = error; });
@@ -23,7 +31,7 @@ var ProductDetailComponent = (function () {
         core_1.Component({
             templateUrl: './app/products/product-detail.component.html'
         }), 
-        __metadata('design:paramtypes', [product_service_1.ProductService])
+        __metadata('design:paramtypes', [product_service_1.ProductService, router_1.ActivatedRoute])
     ], ProductDetailComponent);
     return ProductDetailComponent;
 }());

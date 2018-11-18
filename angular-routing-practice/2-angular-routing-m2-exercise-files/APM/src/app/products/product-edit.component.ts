@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from '../messages/message.service';
 
@@ -9,14 +10,30 @@ import { ProductService } from './product.service';
     templateUrl: './app/products/product-edit.component.html',
     styleUrls: ['./app/products/product-edit.component.css']
 })
-export class ProductEditComponent {
+export class ProductEditComponent implements OnInit {
+    ngOnInit(): void {
+        // let id = +this.route.snapshot.params['id'];
+        // this.getProduct(id);
+        this.route.params.subscribe(
+            params => {
+                console.log(params['id']);
+                this.getProduct(+params['id']); 
+            }
+        )
+    }
     pageTitle: string = 'Product Edit';
     errorMessage: string;
 
     product: IProduct;
 
     constructor(private productService: ProductService,
-                private messageService: MessageService) { }
+        private messageService: MessageService,
+        private route: ActivatedRoute, 
+        private router:Router) {
+        
+            
+
+    }
 
     getProduct(id: number): void {
         this.productService.getProduct(id)
@@ -40,7 +57,7 @@ export class ProductEditComponent {
         if (this.product.id === 0) {
             // Don't delete, it was never saved.
             this.onSaveComplete();
-       } else {
+        } else {
             if (confirm(`Really delete the product: ${this.product.productName}?`)) {
                 this.productService.deleteProduct(this.product.id)
                     .subscribe(
@@ -69,5 +86,6 @@ export class ProductEditComponent {
         }
 
         // Navigate back to the product list
+        this.router.navigateByUrl('/products');
     }
 }
