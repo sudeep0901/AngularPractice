@@ -21,12 +21,18 @@ var ProductEditComponent = (function () {
         this.pageTitle = 'Product Edit';
     }
     ProductEditComponent.prototype.ngOnInit = function () {
-        var _this = this;
         // let id = +this.route.snapshot.params['id'];
         // this.getProduct(id);
-        this.route.params.subscribe(function (params) {
-            console.log(params['id']);
-            _this.getProduct(+params['id']);
+        // this.route.params.subscribe(
+        //     params => {
+        //         console.log(params['id']);
+        //         this.getProduct(+params['id']); 
+        //     }
+        // )
+        var _this = this;
+        // this.onProductRetrieved(this.route.snapshot.data['product']);
+        this.route.data.subscribe(function (data) {
+            _this.onProductRetrieved(data['product']);
         });
     };
     ProductEditComponent.prototype.getProduct = function (id) {

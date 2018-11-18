@@ -11,15 +11,21 @@ import { ProductService } from './product.service';
     styleUrls: ['./app/products/product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit {
+    
     ngOnInit(): void {
         // let id = +this.route.snapshot.params['id'];
         // this.getProduct(id);
-        this.route.params.subscribe(
-            params => {
-                console.log(params['id']);
-                this.getProduct(+params['id']); 
-            }
-        )
+        // this.route.params.subscribe(
+        //     params => {
+        //         console.log(params['id']);
+        //         this.getProduct(+params['id']); 
+        //     }
+        // )
+
+        // this.onProductRetrieved(this.route.snapshot.data['product']);
+        this.route.data.subscribe(data => {
+                this.onProductRetrieved(data['product'])
+        });
     }
     pageTitle: string = 'Product Edit';
     errorMessage: string;
