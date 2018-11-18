@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
  import { NgModule, Component } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
@@ -21,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     BrowserModule,
     HttpModule,
+    CommonModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
   //   RouterModule.forRoot([
   //     {path:'welcome', component:WelcomeComponent},
