@@ -19,6 +19,7 @@ var ProductEditComponent = (function () {
         this.route = route;
         this.router = router;
         this.pageTitle = 'Product Edit';
+        this.dataIsValid = {};
     }
     ProductEditComponent.prototype.ngOnInit = function () {
         // let id = +this.route.snapshot.params['id'];
@@ -34,6 +35,35 @@ var ProductEditComponent = (function () {
         this.route.data.subscribe(function (data) {
             _this.onProductRetrieved(data['product']);
         });
+    };
+    ProductEditComponent.prototype.validate = function () {
+        // Clear the validation object
+        this.dataIsValid = {};
+        // info tab
+        if (this.product.productName &&
+            this.product.productName.length >= 3 &&
+            this.product.productCode) {
+            this.dataIsValid['info'] = true;
+        }
+        else {
+            this.dataIsValid['info'] = false;
+        }
+        // tags tab
+        if (this.product.category &&
+            this.product.category.length >= 3) {
+            this.dataIsValid['tags'] = true;
+        }
+        else {
+            this.dataIsValid['tags'] = false;
+        }
+    };
+    ProductEditComponent.prototype.isvalid = function (path) {
+        var _this = this;
+        this.validate();
+        if (path) {
+            return this.dataIsValid[path];
+        }
+        return (this.dataIsValid && Object.keys(this.dataIsValid).every(function (d) { return _this.dataIsValid[d] === true; }));
     };
     ProductEditComponent.prototype.getProduct = function (id) {
         var _this = this;
@@ -64,7 +94,8 @@ var ProductEditComponent = (function () {
     };
     ProductEditComponent.prototype.saveProduct = function () {
         var _this = this;
-        if (true === true) {
+        // if (true === true) {
+        if (this.isvalid(null)) {
             this.productService.saveProduct(this.product)
                 .subscribe(function () { return _this.onSaveComplete(_this.product.productName + " was saved"); }, function (error) { return _this.errorMessage = error; });
         }

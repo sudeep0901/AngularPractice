@@ -1,6 +1,6 @@
 import { ProductEditTagsComponent } from './product-edit-tags.component';
 import { ProductEditInfoComponent } from './product-edit-info.component';
- 
+
 import { RouterModule, RouteReuseStrategy } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -18,33 +18,43 @@ import { ProductResolver } from './product-resolver.service';
 @NgModule({
   imports: [
     SharedModule,
-    
-    RouterModule.forChild([
-      { path: 'products', component: ProductListComponent },
-      {
-        path: 'products/:id', component: ProductDetailComponent,
-        resolve: { product: ProductResolver }
-      },
-      {
-        path: 'products/:id/edit', 
-        component: ProductEditComponent,
-        resolve: { product: ProductResolver },
-        children:[
 
+    RouterModule.forChild([
+      {
+        path: 'products',
+        // component: ProductListComponent,
+        children: [
           {
             path: '',
-            redirectTo: 'info',
-            pathMatch: 'full'
+            component:ProductListComponent
           },
           {
-            path: 'info',
-            component: ProductEditInfoComponent
+            path: ':id',
+            component: ProductDetailComponent,
+            resolve: { product: ProductResolver }
           },
-          {
-            path : 'tags',
-            component: ProductEditTagsComponent
-          }
 
+          {
+            path: ':id/edit',
+            component: ProductEditComponent,
+            resolve: { product: ProductResolver },
+            children: [
+              {
+                path: '',
+                redirectTo: 'info',
+                pathMatch: 'full'
+              },
+              {
+                path: 'info',
+                component: ProductEditInfoComponent
+              },
+              {
+                path: 'tags',
+                component: ProductEditTagsComponent
+              }
+
+            ]
+          }
         ]
       }
 
@@ -66,3 +76,40 @@ import { ProductResolver } from './product-resolver.service';
   ]
 })
 export class ProductModule { }
+
+
+// RouterModule.forChild([
+//   {
+//     path: 'products',
+//     component: ProductListComponent
+//   },
+//   {
+//     path: 'products/:id',
+//     component: ProductDetailComponent,
+//     resolve: { product: ProductResolver }
+//   },
+//   {
+//     path: 'products/:id/edit',
+//     component: ProductEditComponent,
+//     resolve: { product: ProductResolver },
+//     children: [
+
+//       {
+//         path: '',
+//         redirectTo: 'info',
+//         pathMatch: 'full'
+//       },
+//       {
+//         path: 'info',
+//         component: ProductEditInfoComponent
+//       },
+//       {
+//         path: 'tags',
+//         component: ProductEditTagsComponent
+//       }
+
+//     ]
+//   }
+
+
+// ])
