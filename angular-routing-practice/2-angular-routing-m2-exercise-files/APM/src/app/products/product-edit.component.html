@@ -114,9 +114,9 @@
         </div>
 
     <div class="panel-body" *ngIf="product">
-    <div class="wizard">
-        <a [routerLink] = "['info']"></a>Basic ifo
-        <a [routerLink] = "['tags']"></a>Tags
+    <div class="wizard"> <! -- rout makes attach class active to anhors link so user know wich tab is selected -->
+        <a [routerLink] = "['info']" routerLinkActive="active">Basic Information <span [ngClass]="{'glyphicon glyphicon-exclamation-sign':!isvalid('info')}"></span></a>
+        <a [routerLink] = "['tags']" routerLinkActive="active"> Tags <span [ngClass]="{'glyphicon glyphicon-exclamation-sign':!isvalid('tags')}"></span></a>
     </div>
     <router-outlet></router-outlet>
 
