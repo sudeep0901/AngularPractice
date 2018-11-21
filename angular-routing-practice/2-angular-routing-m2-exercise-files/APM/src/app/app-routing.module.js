@@ -29,7 +29,7 @@ var AppRoutingModule = (function () {
                 //     { path: '**', component: PageNotFoundComponent }
                 // ], { useHash: true }),
                 //Another syntax anything workds
-                router_1.RouterModule.forRoot(ROUTES, { useHash: true }),
+                router_1.RouterModule.forRoot(ROUTES, { useHash: true, enableTracing: true }),
             ],
             exports: [router_1.RouterModule]
         }), 

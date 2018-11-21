@@ -18,7 +18,9 @@ const ROUTES = [
         // ], { useHash: true }),
         
         //Another syntax anything workds
-        RouterModule.forRoot(ROUTES, { useHash: true }),
+        RouterModule.forRoot(ROUTES, { useHash: true, enableTracing: true }, ),    
+        
+
     ],
 
     exports: [RouterModule]
