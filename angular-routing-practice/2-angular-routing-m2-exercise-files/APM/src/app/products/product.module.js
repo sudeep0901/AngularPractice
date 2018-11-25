@@ -19,6 +19,7 @@ var product_filter_pipe_1 = require('./product-filter.pipe');
 var product_service_1 = require('./product.service');
 var shared_module_1 = require('../shared/shared.module');
 var product_resolver_service_1 = require('./product-resolver.service');
+// import { AuthGuard} from '../user/auth.guard-service';
 var ProductModule = (function () {
     function ProductModule() {
     }

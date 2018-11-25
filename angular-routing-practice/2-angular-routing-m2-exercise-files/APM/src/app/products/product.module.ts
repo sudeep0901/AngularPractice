@@ -13,7 +13,7 @@ import { ProductService } from './product.service';
 
 import { SharedModule } from '../shared/shared.module';
 import { ProductResolver } from './product-resolver.service';
-
+// import { AuthGuard} from '../user/auth.guard-service';
 
 @NgModule({
   imports: [

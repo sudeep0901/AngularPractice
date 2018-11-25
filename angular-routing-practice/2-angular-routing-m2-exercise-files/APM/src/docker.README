@@ -1,0 +1,13 @@
+docker ps -a
+docker run -p 8080:3000 -v $(pwd):/var/www -w "/var/www"  node npm start
+
+#To save a Docker image after you have pulled, committed or built it you use the docker save command. For example, lets save a local copy of the verse_gapminder docker image we made:
+docker save verse_gapminder > verse_gapminder.tar
+
+
+#If we want to load that Docker container from the archived tar file in the future, we can use the docker load command:
+docker load --input verse_gapminder.tar
+
+
+
+

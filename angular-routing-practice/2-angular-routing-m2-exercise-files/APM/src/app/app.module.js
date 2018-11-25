@@ -24,6 +24,7 @@ var product_module_1 = require('./products/product.module');
 var user_module_1 = require('./user/user.module');
 var message_module_1 = require('./messages/message.module');
 var app_routing_module_1 = require('./app-routing.module');
+// import { AuthGuard } from './user/auth.guard-service';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -49,6 +50,7 @@ var AppModule = (function () {
                 welcome_component_1.WelcomeComponent,
                 page_not_found_component_1.PageNotFoundComponent
             ],
+            // providers: [AuthGuard],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
