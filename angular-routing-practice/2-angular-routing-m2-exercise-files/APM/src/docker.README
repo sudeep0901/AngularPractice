@@ -8,6 +8,7 @@ docker save verse_gapminder > verse_gapminder.tar
 #If we want to load that Docker container from the archived tar file in the future, we can use the docker load command:
 docker load --input verse_gapminder.tar
 
+docker build -f Dockerfile -t sudeeppatel/node .
+sudo service docker restart
 
-
-
+docker run -d -p 8080:3000 sudeeppatel/node:latest
